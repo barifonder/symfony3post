@@ -1,0 +1,46 @@
+{% extends 'back.html.twig' %}
+
+{% block content %}
+    <h1>Category</h1>
+
+ <div class="card text-center">
+  <div class="card-header">
+        Categorie :  {{ category.id }} a ete cree : <small></small> 
+
+        modification a ete faite : {% if category.updateAt %}{{ category.updateAt|date('Y-m-d H:i:s') }}{% endif %}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Description</h5>
+    <p class="card-text">{{category.description}}</p>
+    {{ form_start(delete_form) }}
+            
+
+
+
+
+            <a class="btn btn-success" href="{{ path('category_index') }}">Retour</a>
+        
+            <a class="btn btn-warning" href="{{ path('category_edit', { 'id': category.id }) }}">Edit</a>
+      
+      
+            <input class="btn btn-danger" onclick="return confirm('vous souhaite le supprimer')" type="submit" value="Delete">
+
+            {{ form_end(delete_form) }}
+      
+  </div>
+  <div class="card-footer text-muted">
+   slug : {{ category.slug }}
+  </div>
+</div>
+
+    
+   
+{% endblock %}
+
+{% block breadcrumb %} 
+        <ul class="breadcrumb">
+            <li><a href="">Tableau de bord  /</a></li>
+            <li ><a href="{{ path('category_index') }}">Listes des categories</a>  /</li>
+            <li ><a class="active">{{ category.libelle }}</a></li>
+        </ul>
+{% endblock %} 

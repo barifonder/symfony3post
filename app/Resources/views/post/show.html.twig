@@ -1,0 +1,45 @@
+{% extends 'back.html.twig' %}
+
+{% block content %}
+    <h1>Post</h1>
+<div class="card text-center">
+  <div class="card-header">
+        Post :  {{ post.id }} a ete publie {% if post.datepublish %}{{ post.datepublish|date('Y-m-d H:i:s') }}{% endif %}<small></small> 
+
+        
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Description</h5>
+    <p class="card-text">{{post.description}}</p>
+    {{ form_start(delete_form) }}
+            
+
+
+
+
+            <a class="btn btn-success" href="{{ path('post_index') }}">Retour</a>
+        
+            <a class="btn btn-warning" href="{{ path('post_edit', { 'id': post.id }) }}">Edit</a>
+      
+      
+            <input class="btn btn-danger" onclick="return confirm('vous souhaite le supprimer')" type="submit" value="Delete">
+
+            {{ form_end(delete_form) }}
+      
+  </div>
+  <div class="card-footer text-muted">
+   slug : {{ post.slug }}
+  </div>
+</div>
+
+    
+   
+{% endblock %}
+
+{% block breadcrumb %} 
+        <ul class="breadcrumb">
+            <li><a href="">Tableau de bord  /</a></li>
+            <li ><a href="{{ path('post_index') }}">Listes des Posts</a>  /</li>
+            <li ><a class="active">{{ post.title }}</a></li>
+        </ul>
+{% endblock %} 

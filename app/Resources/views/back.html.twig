@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('back/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('fontawesome/css/font-awesome.min.css') }}">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">App symfony3</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{path('homepage')}}">Home<i class="fa fa-home" aria-hidden="true"></i>
+
+
+ <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('blog') }}">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('contact') }}">Conatct</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('post_index') }}">Post</a>
+      </li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <li class="nav-item">           
+        <a class="nav-link"><i class="fa fa-cogs fa-spin"></i>Connected : {{ app.user.username }} </a>
+      </li>
+      <li class="nav-item">           
+        <a class="nav-link" href="{{ path('fos_user_security_logout') }}" >Logout <i class="fa fa-sign-in" aria-hidden="true"></i></a>
+      </li>
+            {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i>Log in </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('fos_user_registration_register') }}">Register<i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+      </li>
+      {% endif %}
+  </ul>
+  </div>
+</nav>
+         
+        
+        <div class="container-fluid">
+           <div class="row" >
+           <div class="col-md-4">{% block breadcrumb %}{% endblock %}</div>
+            <div class="col-md-8" align="right" id="app">
+              {% verbatim %}
+                <select v-on:change="getAccesRapide" name="accesRapide" v-model="accesRapide">
+                  <option v-for="acces in lisAcessRapide" v-bind:value="acces.lien">{{acces.libelle}}</option>
+                </select>
+            {% endverbatim %}
+              
+          </div>
+         </div>
+          <div class="row">
+            <div class="col-md-2">
+              <ul class="list-group">
+                <li class="list-group-item"><a href="">Dashboard</a></li>
+                <li class="list-group-item">Category</li>
+                <li class="list-group-item"><a href="{{ path('category_index') }}">category post</a></li>
+                <li class="list-group-item"> <a href="{{ path('category_new') }}">new category</a></li>
+                <li class="list-group-item">Posts</li>
+                <li class="list-group-item"><a href="{{ path('post_index') }}"> Post List</a></li>
+                <li class="list-group-item"><a href="{{ path('post_new') }}">new Post</a></li>
+                <li class="list-group-item">Adminstration</li>
+                <li class="list-group-item"><a href="">Statistic</a></li>
+                <li class="list-group-item"><a href="">Setting</a></li>
+                
+              </ul>
+
+            </div>
+
+            <div class="col-md-10" >
+              {% include 'alert.html.twig' %}
+              
+
+              {% block content %}{% endblock %}</div>
+            </div>
+        </div>
+
+
+        <script src="{{ asset('js/vue.min.js') }}" ></script>
+        <script >
+         var myApp = new Vue({
+          el: "#app",
+          data:{
+             accesRapide: "",
+             lisAcessRapide: [
+
+                    {libelle:"quick acces ", lien:""},
+                    {libelle:"new post", lien:"/post/new"},
+                    {libelle:"new category", lien:"/category/new"},
+             ]
+          },
+          methods: {
+            getAccesRapide: function () {
+             window.location = this.accesRapide;
+            }
+          }        
+         });
+
+        </script>
+        
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

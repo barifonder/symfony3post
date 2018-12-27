@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+   <section class="hero is-primary is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Symfony 3
+      </h1>
+      <h2 class="subtitle">
+       Symfony is a set of PHP Components, a Web Application framework, a Philosophy, and a Community — all working together in harmony.
+      </h2>
+    </div>
+  </div>
+</section>
+<hr>
+
+
+  <div class="container">
+    <div class="columns">
+      <div class="column is-offset-one-quarter is-half"> 
+
+        <h2 class="title is-2">Contact Page </h2>
+     
+         <div class="field">
+           <div class="control">
+              {{form_label(form.from, null, {'label_attr':{'class':'label'}})}}
+              {{form_widget(form.from, {'attr':{'class':'input'}})}}
+
+                          
+           </div>
+         </div>
+         <div class="field">
+           <div class="control">
+              {{form_label(form.subject, null, {'label_attr':{'class':'label'}})}}
+              {{form_widget(form.subject, {'attr':{'class':'input'}})}}
+
+              
+           </div>
+         </div>
+         <div class="field">
+           <div class="control">
+              {{form_label(form.body, null, {'label_attr':{'class':'label'}})}}
+              {{form_widget(form.body, {'attr':{'class':'input'}})}}
+           </div>
+         </div>
+
+         <div class="field">
+          <div class="control">
+             <input type="submit" class="button is-primary" value="Send">  
+          </div>
+         </div>
+       </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
